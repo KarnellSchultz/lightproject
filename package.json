@@ -1,0 +1,14 @@
+{
+  "name": "lightproject",
+  "version": "1.0.0",
+  "description": "This is a project to create a front and backend app to check the amount of light a user will get in a day, depending on their location. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Karnell Schultz",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
