@@ -18,35 +18,44 @@
 
     <p>latitude: <span id="latitude"></span>&deg;</p>
     <p>longitude: <span id="longitude"></span>&deg;</p>
+    <p>timestamp: <span id="timestamp"></span></p>
+    <button id="geolocate">geolocate</button>
   </body>
   <script>
-    if ("geolocation" in navigator) {
-      console.log("Geolocation Available");
-      navigator.geolocation.getCurrentPosition(async position => {
-        const lat = position.coords.latitude; //lat only
-        const lon = position.coords.longitude; // lon only
+    document.getElementById("geolocate").addEventListener("click", event => {
+      if ("geolocation" in navigator) {
+        console.log("Geolocation Available");
+        navigator.geolocation.getCurrentPosition(async position => {
+          const lat = await position.coords.latitude; //lat only
+          const lon = await position.coords.longitude; // lon only
+          const timestamp = await position.timestamp;
+         // console.log(`lat:${lat}, lon:${lon} timestamp:${timestamp}`);
 
-        document.getElementById("latitude").textContent = lat;
-        document.getElementById("longitude").textContent = lon;
+          document.getElementById("latitude").textContent = lat.toFixed(2);
+          document.getElementById("longitude").textContent = lon.toFixed(2);
+          document.getElementById("timestamp").textContent = timestamp;
 
-        console.log(`lat:${lat}, lon:${lon}`);
-
-        const data = { lat, lon };
-
-        const options = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        };
-
-       const response = await fetch("/api", options);//mdn using fetch()
-       const json = await response.json();
-       console.log(json)
-        }); 
-    } else {
-      console.log("Geolocation is not available");
-    }
+            //weather/ endpoint is going to handle the api call to darksky
+          const darkSky_url = `/weather/${lat},${lon}`;
+          const darkSky_response = await fetch(darkSky_url);
+          const darkSky_json = await darkSky_response.json();
+          console.log(darkSky_json);
+          
+          const data = { lat, lon, timestamp };
+          const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          };
+          const response = await fetch("/api", options); //mdn using fetch()
+          const json = await response.json();
+          console.log(json);
+        });
+      } else {
+        console.log("Geolocation is not available");
+      }
+    });
   </script>
 </html>
