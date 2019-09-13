@@ -8,11 +8,13 @@ const fetch = require("node-fetch"); //allows me to use fetch in the server
 require("dotenv").config(); //https://www.npmjs.com/package/dotenv
 const formatDistance = require("date-fns/formatDistance");
 
+console.log(process.env.PORT)
+
 //console.log(process.env); to view the env vars
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Running on ${port}` || 3000);
+  console.log(`Running on ${port}`);
 });
 app.use(express.static("public")); // references a place where express will be looking
 // my content to host. I created a folder named 'public' and put my index.html file in there.
@@ -38,6 +40,7 @@ app.post("/date", (request, response) => {
   const date2 = request.body.sunsetTime;
   console.log(date1, date2);
   const now = new Date();
+  
   const untilSunset = formatDistance(now, new Date(date2))
   let sunlightHours = formatDistance(new Date(date2), new Date(date1));
   const datePackage = { sunlightHours , untilSunset }
