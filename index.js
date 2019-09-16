@@ -8,7 +8,6 @@ const fetch = require("node-fetch"); //allows me to use fetch in the server
 require("dotenv").config(); //https://www.npmjs.com/package/dotenv
 const formatDistance = require("date-fns/formatDistance");
 
-console.log(process.env.PORT)
 
 //console.log(process.env); to view the env vars
 const port = process.env.PORT || 3000;
@@ -23,29 +22,40 @@ app.use(express.json({ limit: "100kb" }));
 const database = new Datastore("database.db"); //create new database
 database.loadDatabase(); //loads the db when the server is run
 
-const logs = [];
+const logs = new Object;
 
 // telling my server what to do when it gets a POST and setting up the endpont
+// /api endpoint only repeats back the data it gets
 app.post("/api", (request, response) => {
   const data = request.body;
-
-  logs.push(data);
-  database.insert(data);
   response.json(data);
-  console.log(data);
+
+  //for logging 
+let currentDateToString = new Date(data.timestamp).toDateString()
+  logs.locationInfo = data;
+  logs.logtime = currentDateToString;
 });
 
 app.post("/date", (request, response) => {
   const date1 = request.body.sunriseTime;
   const date2 = request.body.sunsetTime;
-  console.log(date1, date2);
   const now = new Date();
-  
+  //need logic for when it's night time and the sun is down
+  //if "now" is after sunset >> then do something
+
   const untilSunset = formatDistance(now, new Date(date2))
-  let sunlightHours = formatDistance(new Date(date2), new Date(date1));
+  const sunlightHours = formatDistance(new Date(date2), new Date(date1));
+  
+  if (now > date2 ) {
+    console.log(`It's after sunset`)
+    sunlightHours = "The has already set";
+  }
+
+
   const datePackage = { sunlightHours , untilSunset }
-  database.insert(datePackage);
   response.json(datePackage)
+  logs.datePackage = datePackage; //for logger
+  console.log(datePackage)
 });
 
 //weather api endpoint >> makes a api call to darksky and returns that data to the client
@@ -58,4 +68,11 @@ app.get(`/weather/:latlon`, async (request, response) => {
   const fetch_response = await fetch(darkSkyForecastEndpoint);
   const json = await fetch_response.json();
   response.json(json); //returns the data from darksky back to the client
-});
+  
+
+  const logger = (logs) => database.insert(logs)  //logging to the  db
+  logger(logs);
+  console.log(logs)
+
+
+});      
