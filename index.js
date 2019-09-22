@@ -49,10 +49,10 @@ app.post("/date", (request, response) => {
   let untilSunset = formatDistance(now, new Date(date2))
   let sunlightHours = formatDistance(new Date(date2), new Date(date1));
   //Handles the page after sundown
-  if (now > date2 ) {
+  if (now > date2 || now < date1) {
     console.log("It's after sunset")
     sunlightHours = "It's after sunset";
-    untilSunset = `But, sun will be up in ${formatDistance(now, new Date(date2))} :-) `;
+    untilSunset = `But, sun will be up in ${formatDistance(now, new Date(date1))} :-) `;
   }
 
 
