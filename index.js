@@ -37,34 +37,45 @@ let currentDateToString = new Date(data.timestamp).toDateString()
 });
 
 app.post("/date", (request, response) => {
-  const date1 = request.body.sunriseTime;
+
+      const date1 = request.body.sunriseTime;
   const date2 = request.body.sunsetTime;
   const now = new Date();
+  
+
   //need logic for when it's night time and the sun is down
   //if "now" is after sunset >> then do something
 
-  const untilSunset = formatDistance(now, new Date(date2))
-  const sunlightHours = formatDistance(new Date(date2), new Date(date1));
-  
+  let untilSunset = formatDistance(now, new Date(date2))
+  let sunlightHours = formatDistance(new Date(date2), new Date(date1));
+  //Handles the page after sundown
   if (now > date2 ) {
-    console.log(`It's after sunset`)
-    sunlightHours = "The has already set";
+    console.log("It's after sunset")
+    sunlightHours = "It's after sunset";
+    untilSunset = `But, sun will be up in ${formatDistance(now, new Date(date2))} :-) `;
   }
 
 
-  const datePackage = { sunlightHours , untilSunset }
+  let datePackage = { sunlightHours , untilSunset }
   response.json(datePackage)
   logs.datePackage = datePackage; //for logger
   console.log(datePackage)
+
+
 });
 
 //weather api endpoint >> makes a api call to darksky and returns that data to the client
 const darkSkyKey = process.env.API_KEY;
+
 app.get(`/weather/:latlon`, async (request, response) => {
+
+
   const latlon = request.params.latlon.split(`,`);
   const lat = latlon[0];
   const lon = latlon[1];
   const darkSkyForecastEndpoint = `https://api.darksky.net/forecast/${darkSkyKey}/${lat},${lon}`;
+  console.log( { darkSkyForecastEndpoint })
+
   const fetch_response = await fetch(darkSkyForecastEndpoint);
   const json = await fetch_response.json();
   response.json(json); //returns the data from darksky back to the client
@@ -73,6 +84,8 @@ app.get(`/weather/:latlon`, async (request, response) => {
   const logger = (logs) => database.insert(logs)  //logging to the  db
   logger(logs);
   console.log(logs)
+
+  
 
 
 });      
