@@ -9,11 +9,16 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font: normal normal normal 1rem/1.6 -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 1rem; }
+    font-size: 1rem;
+    height: 100%;
+    position: relative }
     body {
         color: #404040;
         background: white;
-        font-size: 1rem; }
+        font-size: 1rem; 
+      
+        
+    }
 
 .nav-container {
     /* margin: 1.5rem 0; */
@@ -50,12 +55,14 @@ html {
     font-weight: 800;
     background-color: transparent;
 }
-.links {
+.links,
+.info-links {
     
     width: 300px;
     /* border: 1px solid blue;   */
     padding-left: .5rem;
     /* padding-left: 1rem; */
+    line-height: 2rem;
     margin: .8rem;
     display: flex;    justify-content: space-around; 
 }
@@ -73,12 +80,22 @@ html {
     text-decoration-style: wavy;
     text-decoration-color: blue;
 } 
-
+.info-links a {
+    color: #404040;
+    text-decoration: none;
+}
+.info-links a:hover {
+    color: black;
+    /* text-decoration-line: underline; */
+    text-decoration-style: wavy;
+    text-decoration-color: blue;
+}
 
 .header-container,
 .data-container, 
 .links-container,
-.time-container {
+.time-container,
+.link-container {
     padding: 20px 0;
     display: flex;
     justify-content: center;
@@ -92,21 +109,42 @@ flex-direction: column;
 justify-content: center;
 
 }
+
+.data {
+    /* width: 50%; */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 .button-container {
-    Stroke: Solid
-    rgba(177, 177, 177, 0.7)
-    Align: Outside
-    Width: 1px
-    Fill: Solid
-    #53B994
-    Effect: Drop Shadow
-    Radius: 4px
-    Offset: 0px, 4px
-    rgba(0, 0, 0, 0.25)
+    padding-top: .75rem;
+    display: flex;
+    justify-content: center;
+
+    
+
 }
 button {
 
-}
+    -webkit-appearance: none;
+  display: inline-block;
+  border: 1px solid #0366EE;
+  border-radius: 4px;
+  background: #0366EE;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  text-transform: none;
+  padding: 1rem 1.25rem;
+  /* margin: 0 0 .5rem 0; */
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 1; }
+
+
 /* button:hover,
 a:hover {
     background-color: bisque;
@@ -127,8 +165,11 @@ font-size: 1.4rem
 button, a.button, button, [type=submit], [type=reset], [type=button] {
     -webkit-appearance: none;
     display: inline-block;
-    border: 1px solid #0366EE;
+    /* border: 1px solid #0366EE; */
     border-radius: 4px;
+    /* background: #0366EE; */
+
+    border: 1px solid #29de7d;
     background: #0366EE;
     color: #ffffff;
     font-weight: 600;
@@ -136,7 +177,7 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
     font-size: 1rem;
     text-transform: none;
     padding: .75rem 1.25rem;
-    margin: 0 0 .5rem 0;
+    /* margin: 0 0 .5rem 0; */
     vertical-align: middle;
     text-align: center;
     cursor: pointer;
@@ -144,10 +185,18 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
     line-height: 1; }
   
   .button:hover, a.button:hover, button:hover, [type=submit]:hover, [type=reset]:hover, [type=button]:hover {
-    border: 1px solid #0250bc;
-    background: #0250bc;
+   
     color: #ffffff;
-    text-decoration: none; }
+    text-decoration: none;
+    /* border-radius: 4px; */
+
+    color: #ffffff;
+    /* border: 1px solid #29de7d; */
+    background: rgb(57, 133, 240);
+    border-radius: 4px;
+
+
+}
   
   .button:focus, .button:active, a.button:focus, a.button:active, button:focus, button:active, [type=submit]:focus, [type=submit]:active, [type=reset]:focus, [type=reset]:active, [type=button]:focus, [type=button]:active {
     border: 1px solid #0250bc;
@@ -159,3 +208,47 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
     border: 0;
     padding: 0; }
   
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+
+
+}
+.footer {
+    margin: 0%;
+    width: 100%;
+    height: 3rem;
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    border:1px rgb(223, 223, 223);
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.footer-text p {
+    font-size: 1rem;
+    padding: .7rem;
+    color: #ffffff;
+    /* padding-top: .7rem; */
+}
+
+
+ /* Mobile Styles */
+@media only screen and (max-width: 400px) {
+    body {
+
+        display: flex;
+        flex-wrap: wrap;
+      background-color: rgb(250, 196, 198); /* Red */
+    }
+    /* .data-container {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+
+  }
