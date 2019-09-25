@@ -1,3 +1,6 @@
+// import mapBuilder from './map';
+
+
 document.getElementById("geolocate").addEventListener("click", event => {
   if ("geolocation" in navigator) {
     console.log("Geolocation Available");
@@ -8,16 +11,15 @@ document.getElementById("geolocate").addEventListener("click", event => {
       // console.log(`lat:${lat}, lon:${lon} timestamp:${timestamp}`);
       document.getElementById("latitude").textContent = lat.toFixed(2);
       document.getElementById("longitude").textContent = lon.toFixed(2);
- 
+
       //weather/ endpoint is going to handle the api call to darksky
       const darkSky_url = `/weather/${lat},${lon}`;
       const darkSky_response = await fetch(darkSky_url);
       const darkSky_json = await darkSky_response.json();
       console.log(darkSky_json);
       // for (item in darkSky_json) {console.log(item)}
-    const location = await darkSky_json.timezone; // add to the dom
+      const location = await darkSky_json.timezone; // add to the dom
       document.getElementById("location").textContent = await location;
- 
 
       const sunriseTime = darkSky_json.daily.data[0].sunriseTime * 1000; //time in miliseconds
       const sunsetTime = darkSky_json.daily.data[0].sunsetTime * 1000;
@@ -26,6 +28,8 @@ document.getElementById("geolocate").addEventListener("click", event => {
       let formattedSunset = timeFormater(sunsetTime);
       document.getElementById("sunrise-time").textContent = formattedSunrise;
       document.getElementById("sunset-time").textContent = formattedSunset;
+
+      mapBuilder(lat, lon);
 
       // gets the time in a human readable format, 05:23
       function timeFormater(timeData) {
@@ -61,8 +65,6 @@ document.getElementById("geolocate").addEventListener("click", event => {
       ).textContent = await sunlightTimeDiscription.untilSunset;
       console.log(sunlightTimeDiscription);
 
-
-      
       const data = { lat, lon, timestamp };
       const options = {
         method: "POST",
@@ -73,9 +75,30 @@ document.getElementById("geolocate").addEventListener("click", event => {
       };
       const response = await fetch("/api", options); //mdn using fetch()
       const json = await response.json();
-      console.log(json);
+      // console.log(json);
     });
   } else {
     console.log("Geolocation is not available");
   }
 });
+
+
+
+async function mapBuilder(lat, lon) {
+  console.log({lon, lat})
+
+  let mymap = await L.map("mapid").setView([lat, lon], 3);
+
+  await L.tileLayer(
+    "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+    {
+      attribution:
+        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 50,
+      id: "mapbox.streets",
+      accessToken:
+        "pk.eyJ1Ijoia2FybmVsbCIsImEiOiJjazB3ZnE5Z3EwOGVtM25xY3I3czg5ZXEyIn0.JgVjWKQbIy_-zjMcX2VYmA"
+    }
+  ).addTo(mymap);
+  
+}

@@ -100,6 +100,8 @@ html {
     display: flex;
     justify-content: center;
 
+    /* flex-direction: column; */
+
 }
 
 
@@ -109,12 +111,16 @@ flex-direction: column;
 justify-content: center;
 
 }
+.header-image-container {
+    display: flex;
+    justify-content: center;
+}
 
 .data {
     /* width: 50%; */
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-content: center; */
 }
 .button-container {
     padding-top: .75rem;
@@ -207,7 +213,26 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
   .button::-moz-focus-inner, a.button::-moz-focus-inner, button::-moz-focus-inner, [type=submit]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=button]::-moz-focus-inner {
     border: 0;
     padding: 0; }
-  
+
+
+
+    #mapid { 
+        height: 250px; 
+        width: 450px;
+    }
+
+    .map-container {
+        display: flex;
+/* flex-direction: column; */
+justify-content: center;
+        /* width: 100% */
+    }
+    .map-container .spinning-globe {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
 
 .footer-container {
     display: flex;
@@ -225,11 +250,13 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
     justify-content: center;
     border:1px rgb(223, 223, 223);
     background-color: rgba(0, 0, 0, 0.75);
+    z-index:1000
 }
 .footer-text p {
     font-size: 1rem;
     padding: .7rem;
     color: #ffffff;
+    text-decoration-line: none;
     /* padding-top: .7rem; */
 }
 
@@ -239,8 +266,65 @@ button, a.button, button, [type=submit], [type=reset], [type=button] {
     body {
 
         display: flex;
+        justify-content: center;
         flex-wrap: wrap;
       background-color: rgb(250, 196, 198); /* Red */
+      width: 100%;
+    }
+    .nav .links {
+padding: 1rem;    }
+    .header-container {
+        display: flex;
+/* flex-direction: column; */
+width: 100%;
+    }
+    .header {
+        display: flex;
+        justify-content: center;
+
+    }
+    .header img {
+    }
+    .header-image-container {
+        display: flex;
+        justify-content: center;
+    }
+    .time-container {
+        padding-left: 1rem;
+padding-right: 1rem;
+margin-left: 1rem;
+    }
+    .footer {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .button-container {
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+        margin-top: 5rem
+    }
+    .brand {
+        visibility: hidden;
+    }
+    .button {
+        
+        background: transparent;
+    }
+    .button:active {
+        background: transparent;
+    }
+    .footer-container {
+        width: 100%;
+        display: flex;
+     justify-content: center;
+    }
+    .footer {
+        display: flex;
+        justify-content: center;
+    }
+    .map-container {
+        width: 100%;
     }
     /* .data-container {
         width: 100%;
