@@ -1,4 +1,3 @@
-// import mapBuilder from './map';
 
 
 document.getElementById("geolocate").addEventListener("click", event => {
