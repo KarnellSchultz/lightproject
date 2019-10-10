@@ -18,3 +18,6 @@ Features:
 Feature idea: A meter that shows the percentage of light you're currently getting vs the light max. 
 
 Or Show another random locations light index information. 
+
+
+next update will include better logging so that the logging info can be used to make another project.
