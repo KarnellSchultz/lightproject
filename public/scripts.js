@@ -72,12 +72,12 @@ document.getElementById("geolocate").addEventListener("click", event => {
         },
         body: JSON.stringify(data)
       };
-      const response = await fetch("/api", options); //mdn using fetch()
+      const response = await fetch("/api", options);
       const json = await response.json();
       // console.log(json);
     });
   } else {
-    console.log("Geolocation is not available");
+    console.log("Geolocation is NOT available");
   }
 });
 

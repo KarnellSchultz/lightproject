@@ -322,15 +322,11 @@ padding-bottom: 2rem;
     margin-left: 1rem;
   }
 
-  .footer {
-    display: flex;
-    justify-content: flex-start;
-  }
   .button-container {
     display: flex;
     justify-content: center;
     padding: 1rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
   }
   .brand {
     visibility: hidden;
@@ -342,8 +338,8 @@ padding-bottom: 2rem;
     background: transparent;
   }
   .footer-container {
-    width: 100%;
-    display: flex;
+    width: 275px;
+
     justify-content: center;
   }
   .footer {
