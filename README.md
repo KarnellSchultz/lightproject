@@ -17,3 +17,6 @@ Features:
 
 
 Remix this project on Glitch here: https://glitch.com/edit/#!/karnellschultz-lightproject
+
+
+![](https://media.giphy.com/media/jtKCGv8AEOm7dZgCZh/giphy.gif)
