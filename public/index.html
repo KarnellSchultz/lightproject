@@ -14,8 +14,9 @@
 
     <title>Sunlight Project</title>
   </head>
+  <page class="page" >  
   <body>
-    <div class="nav-container"> 
+    <div class=" nav-container"> 
     <div class="nav">
       <div class="brand">
         <!-- <h4>Karnell Schultz</h4> -->
@@ -29,9 +30,9 @@
     </div>
     </div>
 
-    <div class="header-container">
+    <div class="section header-container">
       <div class="header">
-        <h1>Sunlight Project App</h1>
+        <h1 class="header-text">Sunlight Project App</h1>
         <div class="header-image-container"> 
         <img class="header-image" src="https://clipartmag.com/images/spinning-globe-gif-1.gif" 
           alt="Gif image of a spinning globe. This image changes into a map view of where you are located"
@@ -39,14 +40,14 @@
      </div> 
     </div>
     </div>
-    <div class="button-location-container" >   
+    <div class="section button-location-container" >   
     <div class="button-container">
       <div class="button">
           <button type="submit" id="geolocate">Geolocate Me</button>
         </div>
    </div>
   </div>
-  <div class="data-container">
+  <div class="section data-container">
       <div class="data">
         <p>latitude: <span id="latitude"></span>&deg;</p>
         <p>longitude: <span id="longitude"></span>&deg;</p>
@@ -54,7 +55,7 @@
       </div>
     </div>
 
-    <div class="time-container">
+    <div class="section time-container">
       <div class="time">
         <p>Sunrise Time:<span id="sunrise-time"></span></p>
         <p>Sunset Time:<span id="sunset-time"></span></p>
@@ -65,7 +66,7 @@
         </p>
       </div>
     </div>
-    <div class="map-container" > 
+    <div class="section map-container" > 
         <div id="mapid"> 
         </div>
    </div>
@@ -83,6 +84,8 @@
     </div>
     </div>
   </div>
+
+</page>
 
   <script src="scripts.js"> </script>
 
